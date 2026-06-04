@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Okayama UNESCO Association</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/polish.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+<header class="navbar inner-navbar" id="navbar">
+
+    <a href="index.html" class="logo">
+        <h2>OKAYAMA UNESCO</h2>
+    </a>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" data-lang="nav_home">Home</a></li>
+            <li><a href="activities.html" data-lang="nav_activities">Activities</a></li>
+            <li><a href="explore.html" data-lang="nav_explore">Explore</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="news.html" data-lang="nav_news">News</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+            <li><a href="login.html" class="nav-login" data-lang="nav_login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="nav-right">
+        <div class="language-switch">
+            <button id="lang-ja" class="lang-btn" type="button">JA</button>
+            <span>|</span>
+            <button id="lang-en" class="lang-btn" type="button">EN</button>
+        </div>
+
+        <button class="menu-btn" id="menu-btn" aria-label="Open menu">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" data-lang="nav_home">Home</a>
+    <a href="activities.html" data-lang="nav_activities">Activities</a>
+    <a href="explore.html" data-lang="nav_explore">Explore</a>
+    <a href="about.html" data-lang="nav_about">About</a>
+    <a href="news.html" data-lang="nav_news">News</a>
+    <a href="contact.html" data-lang="nav_contact">Contact</a>
+    <a href="login.html" data-lang="nav_login">Login</a>
+</div>
+
+<section class="contact-hero">
+    <h1 data-lang="contact_title">Contact Us</h1>
+    <p>Questions, participation requests, volunteer inquiries, and partnership messages are welcome.</p>
+</section>
+
+<section class="contact-layout">
+
+    <div class="contact-form-card">
+        <h2 data-lang="contact_form_title">Send a Message</h2>
+
+        <form id="contact-form">
+            <input id="contact-name" type="text" placeholder="Your Name" data-lang-placeholder="contact_name" required>
+            <input id="contact-email" type="email" placeholder="Email Address" data-lang-placeholder="contact_email" required>
+            <input id="contact-subject" type="text" placeholder="Subject" data-lang-placeholder="contact_subject">
+            <textarea id="contact-message" placeholder="Message" data-lang-placeholder="contact_message" required></textarea>
+            <button type="submit" data-lang="contact_send">Send Message</button>
+        </form>
+
+        <p class="form-note" id="form-note"></p>
+    </div>
+
+    <div class="contact-info-card">
+        <h2 data-lang="contact_info">Organization Information</h2>
+        <p><strong>Location</strong><br>Okayama, Japan</p>
+        <p><strong>Email</strong><br>info@example.com</p>
+        <p><strong>Hours</strong><br>09:00 - 17:00</p>
+
+        <div class="map-placeholder">
+            Google Map Area
+        </div>
+    </div>
+
+</section>
+
+<section class="faq-section">
+
+    <h2 data-lang="faq_title">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <h3>How can I join activities?</h3>
+        <p>You can contact us through the form or check the activities page for upcoming programs.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Can international students participate?</h3>
+        <p>Yes. Activities are open to both local and international participants.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Do you accept volunteers?</h3>
+        <p>Yes. Volunteer opportunities are announced throughout the year.</p>
+    </div>
+
+</section>
+
+<script src="js/navbar.js"></script>
+<script src="js/language.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/back-to-top.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

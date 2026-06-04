@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Community Learning Workshop",
+    "date": "2026-05-01",
+    "category": "education"
+  },
+  {
+    "id": 2,
+    "title": "Cultural Exchange Event",
+    "date": "2026-04-15",
+    "category": "culture"
+  }
+]

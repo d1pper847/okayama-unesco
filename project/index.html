@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okayama UNESCO Association</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/polish.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar" id="navbar">
+
+    <a href="index.html" class="logo">
+        <h2>OKAYAMA UNESCO</h2>
+    </a>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html" data-lang="nav_home">Home</a></li>
+            <li><a href="activities.html" data-lang="nav_activities">Activities</a></li>
+            <li><a href="explore.html" data-lang="nav_explore">Explore</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="news.html" data-lang="nav_news">News</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+            <li><a href="login.html" class="nav-login" data-lang="nav_login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="nav-right">
+        <div class="language-switch">
+            <button id="lang-ja" class="lang-btn" type="button">JA</button>
+            <span>|</span>
+            <button id="lang-en" class="lang-btn" type="button">EN</button>
+        </div>
+
+        <button class="menu-btn" id="menu-btn" aria-label="Open menu">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" data-lang="nav_home">Home</a>
+    <a href="activities.html" data-lang="nav_activities">Activities</a>
+    <a href="explore.html" data-lang="nav_explore">Explore</a>
+    <a href="about.html" data-lang="nav_about">About</a>
+    <a href="news.html" data-lang="nav_news">News</a>
+    <a href="contact.html" data-lang="nav_contact">Contact</a>
+    <a href="login.html" data-lang="nav_login">Login</a>
+</div>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-japanese" data-lang="hero_japanese">
+            岡山から未来へつなぐ
+        </p>
+
+        <h1 data-lang="hero_title">
+            Connecting Culture and Community Through Learning
+        </h1>
+
+        <p class="hero-description" data-lang="hero_description">
+            Discover local activities, cultural experiences,
+            and sustainable learning opportunities in Okayama.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="activities.html" class="primary-btn" data-lang="hero_primary">
+                Explore Activities
+            </a>
+
+            <a href="about.html" class="secondary-btn" data-lang="hero_secondary">
+                Learn More
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="activities-section">
+
+    <div class="section-title">
+        <p data-lang="home_activities_label">注目の活動</p>
+        <h2 data-lang="home_activities_title">Featured Activities</h2>
+    </div>
+
+    <div class="activities-grid">
+
+        <div class="activity-card">
+            <img src="assets/images/activity1.png" alt="Educational program activity">
+            <div class="card-content">
+                <h3 data-lang="card_education_title">Educational Programs</h3>
+                <p>
+                    <span data-lang="card_education_text">Supporting learning opportunities and community education initiatives.</span>
+                </p>
+                <a href="activities.html">Learn More →</a>
+            </div>
+        </div>
+
+        <div class="activity-card">
+            <img src="assets/images/activity2.png" alt="Cultural exchange activity">
+            <div class="card-content">
+                <h3 data-lang="card_culture_title">Cultural Exchange</h3>
+                <p>
+                    <span data-lang="card_culture_text">Connecting people through culture, traditions, and shared experiences.</span>
+                </p>
+                <a href="activities.html">Learn More →</a>
+            </div>
+        </div>
+
+        <div class="activity-card">
+            <img src="assets/images/activity3.png" alt="Sustainability project activity">
+            <div class="card-content">
+                <h3 data-lang="card_sustain_title">Sustainability Projects</h3>
+                <p>
+                    <span data-lang="card_sustain_text">Promoting environmental awareness and local community action.</span>
+                </p>
+                <a href="activities.html">Learn More →</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="about-preview">
+
+    <div class="about-container">
+
+        <p class="about-label" data-lang="home_about_label">
+            About UNESCO
+        </p>
+
+        <h2 data-lang="home_about_title">
+            Building a Future Through
+            Culture, Education, and Community
+        </h2>
+
+        <p class="about-text" data-lang="home_about_text">
+            The Okayama UNESCO Association supports
+            sustainable learning, cultural exchange,
+            and community-based activities that connect
+            people across generations and backgrounds.
+        </p>
+
+        <div class="about-pillars">
+
+            <div class="pillar">
+                <h3>Education</h3>
+                <p>Learning for future generations.</p>
+            </div>
+
+            <div class="pillar">
+                <h3>Culture</h3>
+                <p>Preserving and sharing local heritage.</p>
+            </div>
+
+            <div class="pillar">
+                <h3>Community</h3>
+                <p>Connecting people through participation.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="explore-section">
+
+    <div class="explore-left">
+
+        <p class="explore-label" data-lang="explore_label">
+            Explore Okayama
+        </p>
+
+        <h2 data-lang="explore_title">
+            Discover Places, Culture, and Community
+        </h2>
+
+        <p>
+            Explore cultural landmarks, local learning spaces,
+            UNESCO-related activities, and community initiatives
+            throughout Okayama.
+        </p>
+
+        <a href="explore.html" class="primary-btn" data-lang="explore_button">
+            Explore Map
+        </a>
+
+    </div>
+
+    <div class="explore-right">
+        <img src="assets/images/map-preview.jpg" alt="Okayama map preview">
+    </div>
+
+</section>
+
+
+<section class="news-section">
+
+    <div class="section-title">
+        <p>最新のお知らせ</p>
+        <h2>News & Events</h2>
+    </div>
+
+    <div class="news-grid">
+
+        <div class="news-card">
+            <img src="assets/images/news1.png" alt="Community learning workshop">
+            <div class="news-content">
+                <span>May 2026</span>
+                <h3>Community Learning Workshop</h3>
+                <p>
+                    Local participants gathered to explore
+                    sustainable learning initiatives.
+                </p>
+            </div>
+        </div>
+
+        <div class="news-card">
+            <img src="assets/images/news2.png" alt="Cultural exchange event">
+            <div class="news-content">
+                <span>April 2026</span>
+                <h3>Cultural Exchange Event</h3>
+                <p>
+                    Students and community members shared
+                    traditions and experiences.
+                </p>
+            </div>
+        </div>
+
+        <div class="news-card">
+            <img src="assets/images/news3.png" alt="Sustainability project launch">
+            <div class="news-content">
+                <span>March 2026</span>
+                <h3>Sustainability Project Launch</h3>
+                <p>
+                    New environmental initiatives begin
+                    across Okayama communities.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+            <h2>OKAYAMA UNESCO</h2>
+            <p>
+                Connecting culture, education, and community
+                for a sustainable future in Okayama.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="activities.html">Activities</a>
+            <a href="explore.html">Explore</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <div class="footer-links">
+            <h3>Information</h3>
+            <a href="news.html">News</a>
+            <a href="contact.html">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Language: JA / EN</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Okayama, Japan</p>
+            <p>info@example.com</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Okayama UNESCO Association. All rights reserved.</p>
+    </div>
+
+</footer>
+
+
+<script src="js/main.js"></script>
+<script src="js/navbar.js"></script>
+
+    <script src="js/animations.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/language.js"></script>
+</body>
+</html>

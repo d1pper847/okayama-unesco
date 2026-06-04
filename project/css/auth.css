@@ -1,0 +1,168 @@
+/* V16 Auth Pages */
+.auth-page{
+    min-height:100vh;
+    padding:140px 8% 80px;
+    background:linear-gradient(135deg,#f8f7f2 0%,#edf5ef 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.auth-card{
+    width:min(100%,460px);
+    background:white;
+    padding:42px;
+    border-radius:28px;
+    box-shadow:0 24px 70px rgba(0,0,0,0.11);
+}
+
+.auth-card h1{
+    font-size:2rem;
+    color:#184d3b;
+    margin-bottom:10px;
+}
+
+.auth-card .auth-subtitle{
+    color:#666;
+    line-height:1.7;
+    margin-bottom:28px;
+}
+
+.auth-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group label{
+    font-weight:700;
+    color:#1f1f1f;
+}
+
+.form-group input{
+    padding:14px 16px;
+    border:1px solid #d7ddd8;
+    border-radius:14px;
+    font:inherit;
+    outline:none;
+    transition:0.25s ease;
+}
+
+.form-group input:focus{
+    border-color:#2f7d5b;
+    box-shadow:0 0 0 4px rgba(47,125,91,0.12);
+}
+
+.auth-btn{
+    margin-top:8px;
+    padding:15px 22px;
+    border:none;
+    border-radius:999px;
+    background:#184d3b;
+    color:white;
+    font-weight:800;
+    font:inherit;
+    cursor:pointer;
+    transition:0.25s ease;
+}
+
+.auth-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(24,77,59,0.22);
+}
+
+.auth-message{
+    min-height:24px;
+    margin-top:14px;
+    font-weight:700;
+    color:#184d3b;
+}
+
+.auth-link{
+    margin-top:22px;
+    text-align:center;
+    color:#555;
+}
+
+.auth-link a{
+    color:#184d3b;
+    font-weight:800;
+}
+
+.dashboard-page{
+    min-height:100vh;
+    padding:140px 8% 80px;
+    background:#f8f7f2;
+}
+
+.dashboard-header{
+    max-width:1100px;
+    margin:0 auto 36px;
+}
+
+.dashboard-header h1{
+    font-size:2.4rem;
+    color:#184d3b;
+    margin-bottom:10px;
+}
+
+.dashboard-grid{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.dashboard-card{
+    background:white;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.08);
+}
+
+.dashboard-card h2{
+    color:#184d3b;
+    margin-bottom:12px;
+}
+
+.dashboard-card p{
+    color:#666;
+    line-height:1.7;
+}
+
+.logout-btn{
+    margin-top:24px;
+    background:#1f1f1f;
+}
+
+@media(max-width:900px){
+    .dashboard-grid{grid-template-columns:1fr;}
+    .auth-card{padding:32px 24px;}
+}
+
+
+/* V17 dashboard small upgrades */
+.dashboard-user-info{
+    margin-top: 12px;
+    font-weight: 500;
+    color: #345;
+}
+
+.dashboard-link{
+    display: inline-block;
+    margin-top: 14px;
+    color: #184d3b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-link:hover{
+    text-decoration: underline;
+}

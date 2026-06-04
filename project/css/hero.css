@@ -1,0 +1,78 @@
+.hero{
+    min-height:100vh;
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.42),
+        rgba(0,0,0,0.30)
+    ),
+    url("../assets/images/hero.jpg");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    padding:0 8%;
+    position:relative;
+}
+
+.hero-content{
+    max-width:760px;
+    color:white;
+    z-index:2;
+    animation:fadeUp 1.2s ease;
+}
+
+.hero-japanese{
+    font-size:1.5rem;
+    margin-bottom:22px;
+    letter-spacing:0.06em;
+}
+
+.hero h1{
+    font-size:5rem;
+    line-height:1.05;
+    margin-bottom:28px;
+}
+
+.hero-description{
+    font-size:1.15rem;
+    line-height:1.8;
+    max-width:600px;
+    margin-bottom:45px;
+    color:rgba(255,255,255,0.9);
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    display:inline-block;
+    background:#184d3b;
+    color:white;
+    padding:16px 38px;
+    border-radius:999px;
+    font-weight:600;
+    transition:0.3s ease;
+}
+
+.primary-btn:hover{
+    transform:translateY(-3px);
+    background:#23664f;
+}
+
+.secondary-btn{
+    display:inline-block;
+    border:1px solid rgba(255,255,255,0.8);
+    color:white;
+    padding:16px 38px;
+    border-radius:999px;
+    font-weight:600;
+    transition:0.3s ease;
+}
+
+.secondary-btn:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,0.15);
+}

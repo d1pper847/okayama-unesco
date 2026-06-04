@@ -1,0 +1,272 @@
+.inner-navbar{
+    background:rgba(248,247,242,0.92);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.inner-navbar .logo h2,
+.inner-navbar .nav-links a,
+.inner-navbar .language-switch{
+    color:#1f1f1f;
+}
+
+.inner-navbar .menu-btn span{
+    background:#1f1f1f;
+}
+
+
+.activities-hero{
+    min-height:70vh;
+    padding:150px 8% 90px;
+    background:
+    linear-gradient(
+        rgba(24,77,59,0.72),
+        rgba(24,77,59,0.58)
+    ),
+    url("../assets/images/activity1.png");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    color:white;
+}
+
+.activities-hero-content{
+    max-width:850px;
+}
+
+.activities-hero-content p{
+    font-weight:600;
+    margin-bottom:22px;
+    letter-spacing:0.06em;
+}
+
+.activities-hero-content h1{
+    font-size:4.5rem;
+    line-height:1.08;
+    margin-bottom:28px;
+}
+
+.activities-hero-content span{
+    display:block;
+    max-width:650px;
+    line-height:1.8;
+    color:rgba(255,255,255,0.88);
+}
+
+
+.activity-filter-section{
+    padding:110px 8%;
+    background:#f8f7f2;
+}
+
+.filter-header{
+    margin-bottom:40px;
+}
+
+.filter-header p{
+    color:#184d3b;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.filter-header h2{
+    font-size:3rem;
+}
+
+.filter-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:55px;
+}
+
+.filter-btn{
+    border:none;
+    background:white;
+    color:#184d3b;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 8px 24px rgba(0,0,0,0.05);
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+    background:#184d3b;
+    color:white;
+    transform:translateY(-2px);
+}
+
+
+.activity-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:34px;
+}
+
+.activity-item{
+    background:white;
+    border-radius:28px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    min-height:320px;
+    box-shadow:0 12px 34px rgba(0,0,0,0.06);
+    transition:0.35s ease;
+}
+
+.activity-item.hide{
+    display:none;
+}
+
+.activity-item:hover{
+    transform:translateY(-8px);
+}
+
+.activity-item img{
+    height:100%;
+    object-fit:cover;
+}
+
+.activity-info{
+    padding:34px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.tag{
+    display:inline-block;
+    width:max-content;
+    background:#e8f0ec;
+    color:#184d3b;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:0.85rem;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.activity-info h3{
+    font-size:1.55rem;
+    margin-bottom:15px;
+}
+
+.activity-info p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:22px;
+}
+
+.activity-meta{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    color:#777;
+    font-size:0.92rem;
+    margin-bottom:22px;
+}
+
+.activity-info a{
+    color:#184d3b;
+    font-weight:700;
+}
+
+
+.join-section{
+    padding:120px 8%;
+    background:#173d31;
+    color:white;
+    text-align:center;
+}
+
+.join-section div{
+    max-width:760px;
+    margin:auto;
+}
+
+.join-section p{
+    color:rgba(255,255,255,0.72);
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.join-section h2{
+    font-size:3rem;
+    line-height:1.2;
+    margin-bottom:35px;
+}
+
+.join-section a{
+    display:inline-block;
+    background:white;
+    color:#184d3b;
+    padding:16px 38px;
+    border-radius:999px;
+    font-weight:700;
+    transition:0.3s ease;
+}
+
+.join-section a:hover{
+    transform:translateY(-3px);
+}
+
+
+@media(max-width:1100px){
+
+    .activity-list{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .activities-hero-content h1{
+        font-size:3rem;
+    }
+
+    .filter-header h2,
+    .join-section h2{
+        font-size:2.3rem;
+    }
+
+    .activity-item{
+        grid-template-columns:1fr;
+    }
+
+    .activity-item img{
+        height:260px;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .activities-hero{
+        padding:140px 6% 80px;
+    }
+
+    .activity-filter-section,
+    .join-section{
+        padding:90px 6%;
+    }
+
+    .activities-hero-content h1{
+        font-size:2.4rem;
+    }
+
+    .filter-buttons{
+        gap:12px;
+    }
+
+    .filter-btn{
+        padding:12px 20px;
+    }
+
+}

@@ -1,0 +1,93 @@
+/* V8 Premium Animations */
+
+.reveal{
+    opacity:0;
+    transform:translateY(38px);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+}
+
+.reveal.revealed{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.reveal-delay-1{
+    transition-delay:0.08s;
+}
+
+.reveal-delay-2{
+    transition-delay:0.16s;
+}
+
+.reveal-delay-3{
+    transition-delay:0.24s;
+}
+
+.soft-float{
+    animation:softFloat 5s ease-in-out infinite;
+}
+
+@keyframes softFloat{
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Smooth premium hover system */
+
+.activity-card,
+.news-card,
+.news-page-card,
+.place-item,
+.related-card,
+.activity-item{
+    will-change:transform;
+}
+
+.primary-btn,
+.secondary-btn,
+.filter-btn,
+.news-filter,
+.join-section a,
+.featured-content a,
+.place-card a{
+    will-change:transform;
+}
+
+/* Page loading polish */
+
+body{
+    animation:pageFade 0.55s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
