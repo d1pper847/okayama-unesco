@@ -26,10 +26,21 @@ async function apiRequest(path, data = null, method = "POST"){
         options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(`${AUTH_API_BASE}${path}`, options);
+    let response;
+    try{
+        response = await fetch(`${AUTH_API_BASE}${path}`, options);
+    }catch(error){
+        const networkError = new Error("Backend is not running.");
+        networkError.isNetworkError = true;
+        throw networkError;
+    }
+
     const result = await response.json().catch(() => ({}));
     if(!response.ok){
-        throw new Error(result.message || "Server error");
+        const apiError = new Error(result.message || "Server error");
+        apiError.status = response.status;
+        apiError.detail = result.detail || "";
+        throw apiError;
     }
     return result;
 }
@@ -42,11 +53,19 @@ function getSavedUser(){
     return JSON.parse(localStorage.getItem(AUTH_USER_KEY) || "null");
 }
 
+async function demoPasswordHash(password){
+    const data = new TextEncoder().encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hashBuffer)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
 function setLoggedIn(user, token = null, demoMode = false){
     localStorage.setItem(AUTH_SESSION_KEY, "true");
     localStorage.setItem(AUTH_DEMO_KEY, demoMode ? "true" : "false");
     if(token){
         localStorage.setItem(AUTH_TOKEN_KEY, token);
+    }else{
+        localStorage.removeItem(AUTH_TOKEN_KEY);
     }
     saveUser(user);
 }
@@ -55,28 +74,34 @@ async function registerUser(event){
     event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
 
     if(!name || !email || !password){
-        showMessage("Please fill in all fields.", true);
+        showMessage(window.t ? window.t("auth_required", "Please fill in all fields.") : "Please fill in all fields.", true);
         return;
     }
 
-    if(password.length < 4){
-        showMessage("Password must be at least 4 characters.", true);
+    if(password.length < 8){
+        showMessage(window.t ? window.t("auth_password_short", "Password must be at least 8 characters.") : "Password must be at least 8 characters.", true);
         return;
     }
 
     try{
         const result = await apiRequest("/register", { name, email, password });
         setLoggedIn(result.user, result.token, false);
-        showMessage("Account created with Java backend and MySQL.");
+        showMessage(window.t ? window.t("auth_register_success", "Account created successfully.") : "Account created successfully.");
         setTimeout(() => window.location.href = "dashboard.html", 700);
     }catch(error){
-        const demoUser = { id: 0, name, email, password, role: "USER" };
+        if(!error.isNetworkError){
+            showMessage(error.message || "Registration failed.", true);
+            return;
+        }
+
+        const passwordHash = await demoPasswordHash(password);
+        const demoUser = { id: 0, name, email, passwordHash, role: "USER" };
         setLoggedIn(demoUser, null, true);
-        showMessage("Backend/MySQL is not running, so demo mode was used.");
+        showMessage(window.t ? window.t("auth_register_offline", "Account created in offline mode.") : "Account created in offline mode.");
         setTimeout(() => window.location.href = "dashboard.html", 900);
     }
 }
@@ -84,31 +109,37 @@ async function registerUser(event){
 async function loginUser(event){
     event.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
     const password = document.getElementById("password").value;
 
     try{
         const result = await apiRequest("/login", { email, password });
         setLoggedIn(result.user, result.token, false);
-        showMessage("Login successful using backend/MySQL.");
+        showMessage(window.t ? window.t("auth_login_success", "Login successful.") : "Login successful.");
         setTimeout(() => window.location.href = "dashboard.html", 700);
     }catch(error){
-        const savedUser = getSavedUser();
-        if(!savedUser){
-            showMessage("No account found. Please register first.", true);
+        if(!error.isNetworkError){
+            showMessage(error.message || "Login failed.", true);
             return;
         }
-        if(savedUser.email !== email || savedUser.password !== password){
-            showMessage("Email or password is incorrect.", true);
+
+        const savedUser = getSavedUser();
+        const passwordHash = await demoPasswordHash(password);
+        if(!savedUser){
+            showMessage(window.t ? window.t("auth_backend_required", "Backend is not running. Please register first or start the backend.") : "Backend is not running. Please register first or start the backend.", true);
+            return;
+        }
+        if(savedUser.email !== email || savedUser.passwordHash !== passwordHash){
+            showMessage(window.t ? window.t("auth_invalid", "Email or password is incorrect.") : "Email or password is incorrect.", true);
             return;
         }
         setLoggedIn(savedUser, null, true);
-        showMessage("Login successful in demo mode.");
+        showMessage(window.t ? window.t("auth_login_offline", "Login successful in offline mode.") : "Login successful in offline mode.");
         setTimeout(() => window.location.href = "dashboard.html", 700);
     }
 }
 
-function updateDashboard(user, modeText = "Demo Mode"){
+function updateDashboard(user, modeText = null){
     const userName = document.getElementById("user-name");
     const userEmail = document.getElementById("user-email");
     const userRole = document.getElementById("user-role");
@@ -117,7 +148,7 @@ function updateDashboard(user, modeText = "Demo Mode"){
     if(userName) userName.textContent = user?.name || "User";
     if(userEmail) userEmail.textContent = user?.email || "-";
     if(userRole) userRole.textContent = user?.role || "USER";
-    if(loginMode) loginMode.textContent = modeText;
+    if(loginMode) loginMode.textContent = modeText || (window.t ? window.t("dashboard_mode_offline", "Offline Mode") : "Offline Mode");
 }
 
 async function protectDashboard(){
@@ -131,17 +162,18 @@ async function protectDashboard(){
     const savedUser = getSavedUser();
 
     if(demoMode){
-        updateDashboard(savedUser, "Demo Mode");
+        updateDashboard(savedUser, window.t ? window.t("dashboard_mode_offline", "Offline Mode") : "Offline Mode");
         return;
     }
 
     try{
         const result = await apiRequest("/me", null, "GET");
         saveUser(result.user);
-        updateDashboard(result.user, "Backend / MySQL Login");
+        updateDashboard(result.user, window.t ? window.t("dashboard_mode_backend", "Backend / MySQL Login") : "Backend / MySQL Login");
     }catch(error){
         localStorage.removeItem(AUTH_SESSION_KEY);
         localStorage.removeItem(AUTH_TOKEN_KEY);
+        localStorage.removeItem(AUTH_DEMO_KEY);
         window.location.href = "login.html";
     }
 }
@@ -150,7 +182,7 @@ async function logoutUser(){
     try{
         await apiRequest("/logout", null, "POST");
     }catch(error){
-        
+        // Logout should still clear browser session when backend is unavailable.
     }
     localStorage.removeItem(AUTH_SESSION_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);

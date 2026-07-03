@@ -49,3 +49,22 @@ CREATE TABLE IF NOT EXISTS activity_applications (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (activity_id) REFERENCES activities(id) ON DELETE SET NULL
 );
+
+CREATE TABLE IF NOT EXISTS supported_languages (
+    code VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    english_name VARCHAR(100) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+INSERT INTO supported_languages (code, name, english_name, is_active) VALUES
+    ('ja', '日本語', 'Japanese', TRUE),
+    ('en', 'English', 'English', TRUE),
+    ('zh', '中文', 'Chinese', TRUE),
+    ('my', 'မြန်မာ', 'Burmese', TRUE),
+    ('ne', 'नेपाली', 'Nepali', TRUE),
+    ('si', 'සිංහල', 'Sinhala', TRUE)
+ON DUPLICATE KEY UPDATE
+    name = VALUES(name),
+    english_name = VALUES(english_name),
+    is_active = VALUES(is_active);

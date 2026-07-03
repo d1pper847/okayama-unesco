@@ -2,6 +2,13 @@ const contactForm = document.getElementById("contact-form");
 const formNote = document.getElementById("form-note");
 const CONTACT_API = "http://localhost:8080/api/contact";
 
+function showContactNote(text, isError = false){
+    if(!formNote) return;
+    formNote.textContent = text;
+    formNote.classList.add("show");
+    formNote.style.color = isError ? "#b42318" : "#184d3b";
+}
+
 if(contactForm && formNote){
     contactForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -13,6 +20,11 @@ if(contactForm && formNote){
             message: document.getElementById("contact-message").value.trim()
         };
 
+        if(!payload.name || !payload.email || !payload.message){
+            showContactNote(window.t ? window.t("contact_validation_required", "Please enter your name, email, and message.") : "Please enter your name, email, and message.", true);
+            return;
+        }
+
         try{
             const response = await fetch(CONTACT_API, {
                 method: "POST",
@@ -20,14 +32,18 @@ if(contactForm && formNote){
                 body: JSON.stringify(payload)
             });
 
-            if(!response.ok) throw new Error("Contact API failed");
-
-            formNote.textContent = "Thank you. Your message was saved to the database.";
+            const result = await response.json().catch(() => ({}));
+            if(!response.ok){
+                throw new Error(result.message || "Contact API failed");
+            }
+            showContactNote(window.t ? window.t("contact_success", "Thank you. Your message was saved.") : "Thank you. Your message was saved.");
         }catch(error){
-            formNote.textContent = "Thank you. Backend is not running, so this message was shown in demo mode.";
+            const savedMessages = JSON.parse(localStorage.getItem("okayamaUnescoContactMessages") || "[]");
+            savedMessages.push({ ...payload, savedAt: new Date().toISOString(), mode: "demo" });
+            localStorage.setItem("okayamaUnescoContactMessages", JSON.stringify(savedMessages));
+            showContactNote(window.t ? window.t("contact_offline", "Thank you. Your message was saved in this browser because the backend is not running.") : "Thank you. Your message was saved in this browser because the backend is not running.");
         }
 
-        formNote.classList.add("show");
         contactForm.reset();
     });
 }

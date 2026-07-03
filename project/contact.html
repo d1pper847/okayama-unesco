@@ -1,123 +1,136 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Okayama UNESCO Association</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/polish.css">
-    <link rel="stylesheet" href="css/animations.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-lang="page_title_contact">Contact | Okayama UNESCO Association</title>
+<meta name="description" content="Okayama UNESCO Association website for activities, news, cultural learning, and community exchange."/>
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml"/>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/navbar.css" rel="stylesheet"/>
+<link href="css/contact.css" rel="stylesheet"/>
+<link href="css/polish.css" rel="stylesheet"/>
+<link href="css/animations.css" rel="stylesheet"/>
+<link href="css/responsive.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-<header class="navbar inner-navbar" id="navbar">
-
-    <a href="index.html" class="logo">
-        <h2>OKAYAMA UNESCO</h2>
-    </a>
-
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html" data-lang="nav_home">Home</a></li>
-            <li><a href="activities.html" data-lang="nav_activities">Activities</a></li>
-            <li><a href="explore.html" data-lang="nav_explore">Explore</a></li>
-            <li><a href="about.html" data-lang="nav_about">About</a></li>
-            <li><a href="news.html" data-lang="nav_news">News</a></li>
-            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
-            <li><a href="login.html" class="nav-login" data-lang="nav_login">Login</a></li>
-        </ul>
-    </nav>
-
-    <div class="nav-right">
-        <div class="language-switch">
-            <button id="lang-ja" class="lang-btn" type="button">JA</button>
-            <span>|</span>
-            <button id="lang-en" class="lang-btn" type="button">EN</button>
-        </div>
-
-        <button class="menu-btn" id="menu-btn" aria-label="Open menu">
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-
-</header>
-
-<div class="mobile-menu" id="mobile-menu">
-    <a href="index.html" data-lang="nav_home">Home</a>
-    <a href="activities.html" data-lang="nav_activities">Activities</a>
-    <a href="explore.html" data-lang="nav_explore">Explore</a>
-    <a href="about.html" data-lang="nav_about">About</a>
-    <a href="news.html" data-lang="nav_news">News</a>
-    <a href="contact.html" data-lang="nav_contact">Contact</a>
-    <a href="login.html" data-lang="nav_login">Login</a>
+<header class="navbar inner-navbar scrolled" id="navbar">
+<a class="logo site-brand" href="index.html" aria-label="Okayama UNESCO Association home">
+<img class="site-logo-img" src="https://static.wixstatic.com/media/25210c_9151ff8df04a4978af1de5432f35d9f3~mv2.png/v1/fill/w_694%2Ch_109%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.png" alt="Okayama UNESCO Association logo"/>
+<span class="site-brand-text"><strong>OKAYAMA UNESCO</strong><small>岡山ユネスコ協会</small></span>
+</a>
+<nav>
+<ul class="nav-links">
+<li><a data-lang="nav_home" href="index.html">Home</a></li>
+<li><a data-lang="nav_activities" href="activities.html">Activities</a></li>
+<li><a data-lang="nav_explore" href="explore.html">Explore</a></li>
+<li><a data-lang="nav_about" href="about.html">About</a></li>
+<li><a data-lang="nav_greeting" href="greeting.html">Greeting</a></li>
+<li><a data-lang="nav_news" href="news.html">News</a></li>
+<li><a data-lang="nav_contact" href="contact.html">Contact</a></li>
+<li><a class="nav-login" data-lang="nav_login" href="login.html">Login</a></li>
+</ul>
+</nav>
+<div class="nav-right">
+<div class="language-switch"></div>
+<button aria-label="Open menu" class="menu-btn" id="menu-btn">
+<span></span>
+<span></span>
+</button>
 </div>
-
+</header>
+<div class="mobile-menu" id="mobile-menu">
+<a data-lang="nav_home" href="index.html">Home</a>
+<a data-lang="nav_activities" href="activities.html">Activities</a>
+<a data-lang="nav_explore" href="explore.html">Explore</a>
+<a data-lang="nav_about" href="about.html">About</a>
+<a data-lang="nav_greeting" href="greeting.html">Greeting</a>
+<a data-lang="nav_news" href="news.html">News</a>
+<a data-lang="nav_contact" href="contact.html">Contact</a>
+<a data-lang="nav_login" href="login.html">Login</a>
+</div>
 <section class="contact-hero">
-    <h1 data-lang="contact_title">Contact Us</h1>
-    <p>Questions, participation requests, volunteer inquiries, and partnership messages are welcome.</p>
+<h1 data-lang="contact_title">Contact Us</h1>
+<p data-lang="contact_text">Questions, participation requests, volunteer inquiries, and partnership messages are welcome.</p>
 </section>
-
 <section class="contact-layout">
-
-    <div class="contact-form-card">
-        <h2 data-lang="contact_form_title">Send a Message</h2>
-
-        <form id="contact-form">
-            <input id="contact-name" type="text" placeholder="Your Name" data-lang-placeholder="contact_name" required>
-            <input id="contact-email" type="email" placeholder="Email Address" data-lang-placeholder="contact_email" required>
-            <input id="contact-subject" type="text" placeholder="Subject" data-lang-placeholder="contact_subject">
-            <textarea id="contact-message" placeholder="Message" data-lang-placeholder="contact_message" required></textarea>
-            <button type="submit" data-lang="contact_send">Send Message</button>
-        </form>
-
-        <p class="form-note" id="form-note"></p>
-    </div>
-
-    <div class="contact-info-card">
-        <h2 data-lang="contact_info">Organization Information</h2>
-        <p><strong>Location</strong><br>Okayama, Japan</p>
-        <p><strong>Email</strong><br>info@example.com</p>
-        <p><strong>Hours</strong><br>09:00 - 17:00</p>
-
-        <div class="map-placeholder">
-            Google Map Area
-        </div>
-    </div>
-
+<div class="contact-form-card">
+<h2 data-lang="contact_form_title">Send a Message</h2>
+<form id="contact-form">
+<input data-lang-placeholder="contact_name" id="contact-name" placeholder="Your Name" required="" type="text"/>
+<input data-lang-placeholder="contact_email" id="contact-email" placeholder="Email Address" required="" type="email"/>
+<input data-lang-placeholder="contact_subject" id="contact-subject" placeholder="Subject" type="text"/>
+<textarea data-lang-placeholder="contact_message" id="contact-message" placeholder="Message" required=""></textarea>
+<button data-lang="contact_send" type="submit">Send Message</button>
+</form>
+<p class="form-note" id="form-note"></p>
+</div>
+<div class="contact-info-card">
+<h2 data-lang="contact_info">Organization Information</h2>
+<p><strong data-lang="contact_location">Location</strong><br/><span data-lang="contact_address">Okayama, Japan</span></p>
+<p><strong data-lang="contact_email_label">Email</strong><br/>info@example.com</p>
+<p><strong data-lang="contact_hours">Hours</strong><br/>09:00 - 17:00</p>
+<div aria-label="Okayama map" class="map-embed">
+<iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Okayama%2C%20Japan&amp;output=embed" title="Okayama Map">
+</iframe>
+</div>
+<p class="map-caption" data-lang="contact_map_caption">Map area: Okayama, Japan</p>
+</div>
 </section>
-
 <section class="faq-section">
-
-    <h2 data-lang="faq_title">Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-        <h3>How can I join activities?</h3>
-        <p>You can contact us through the form or check the activities page for upcoming programs.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3>Can international students participate?</h3>
-        <p>Yes. Activities are open to both local and international participants.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3>Do you accept volunteers?</h3>
-        <p>Yes. Volunteer opportunities are announced throughout the year.</p>
-    </div>
-
+<h2 data-lang="faq_title">Frequently Asked Questions</h2>
+<div class="faq-item">
+<h3 data-lang="faq1_q">How can I join activities?</h3>
+<p data-lang="faq1_a">You can contact us through the form or check the activities page for upcoming programs.</p>
+</div>
+<div class="faq-item">
+<h3 data-lang="faq2_q">Can international students participate?</h3>
+<p data-lang="faq2_a">Yes. Activities are open to both local and international participants.</p>
+</div>
+<div class="faq-item">
+<h3 data-lang="faq3_q">Do you accept volunteers?</h3>
+<p data-lang="faq3_a">Yes. Volunteer opportunities are announced throughout the year.</p>
+</div>
 </section>
-
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-brand">
+<img class="footer-logo-img" src="https://static.wixstatic.com/media/25210c_9151ff8df04a4978af1de5432f35d9f3~mv2.png/v1/fill/w_694%2Ch_109%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.png" alt="Okayama UNESCO Association logo"/>
+<h2>OKAYAMA UNESCO</h2>
+<p class="footer-subtitle">岡山ユネスコ協会</p>
+<p data-lang="footer_text">Connecting culture, education, and community for a sustainable future in Okayama.</p>
+</div>
+<div class="footer-links">
+<h3 data-lang="footer_quick">Quick Links</h3>
+<a data-lang="nav_home" href="index.html">Home</a>
+<a data-lang="nav_activities" href="activities.html">Activities</a>
+<a data-lang="nav_explore" href="explore.html">Explore</a>
+<a data-lang="nav_about" href="about.html">About</a>
+<a data-lang="nav_greeting" href="greeting.html">Greeting</a>
+</div>
+<div class="footer-links">
+<h3 data-lang="footer_info">Information</h3>
+<a data-lang="nav_news" href="news.html">News</a>
+<a data-lang="nav_contact" href="contact.html">Contact</a>
+<a data-lang="nav_login" href="login.html">Login</a>
+<a data-lang="nav_register" href="register.html">Register</a>
+</div>
+<div class="footer-contact">
+<h3 data-lang="footer_contact">Contact</h3>
+<p data-lang="footer_location">Okayama, Japan</p>
+<p data-lang="footer_org">Okayama UNESCO Association</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© <span data-current-year="">2026</span> <span data-lang="footer_org">Okayama UNESCO Association</span>. <span data-lang="footer_rights">All rights reserved.</span></p>
+</div>
+</footer>
 <script src="js/navbar.js"></script>
 <script src="js/language.js"></script>
 <script src="js/contact.js"></script>
 <script src="js/animations.js"></script>
 <script src="js/back-to-top.js"></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>

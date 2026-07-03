@@ -1,0 +1,46 @@
+.greeting-hero{
+    padding:140px 8% 70px;
+    background:linear-gradient(135deg,#f7f5ee 0%,#eef5ef 100%);
+}
+.greeting-hero-inner{max-width:1180px;margin:0 auto;}
+.greeting-hero p{color:#0f5c46;font-weight:700;margin-bottom:14px;}
+.greeting-hero h1{font-size:clamp(42px,7vw,88px);line-height:1.02;margin:0 0 20px;color:#202020;letter-spacing:-.04em;}
+.greeting-hero span{display:block;max-width:760px;font-size:18px;line-height:1.8;color:#666;}
+.greeting-section{padding:80px 8%;background:#fbfaf5;}
+.greeting-layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:56px;align-items:start;}
+.president-card{background:#fff;border-radius:28px;padding:26px;box-shadow:0 20px 55px rgba(0,0,0,.08);position:sticky;top:110px;text-align:center;}
+.president-card img{width:100%;max-width:245px;border-radius:24px;display:block;margin:0 auto 22px;object-fit:cover;background:#e9e9e9;}
+.president-card h2{font-size:24px;margin:0 0 8px;color:#202020;}
+.president-card p{margin:0;color:#0f5c46;font-weight:700;line-height:1.7;}
+.greeting-content{background:#fff;border-radius:34px;padding:52px;box-shadow:0 20px 55px rgba(0,0,0,.06);}
+.greeting-content h2{font-size:34px;margin:0 0 24px;color:#202020;letter-spacing:-.02em;}
+.greeting-content p{font-size:17px;line-height:2;color:#555;margin:0 0 24px;}
+.greeting-signature{margin-top:42px;padding-top:28px;border-top:1px solid #e5e2d8;text-align:right;color:#0f5c46;font-weight:800;font-size:18px;line-height:1.8;}
+.greeting-actions{max-width:1180px;margin:0 auto;padding-top:34px;display:flex;gap:16px;flex-wrap:wrap;}
+.greeting-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;text-decoration:none;font-weight:800;background:#0f5c46;color:#fff;box-shadow:0 12px 30px rgba(15,92,70,.18);}
+.greeting-btn.secondary{background:#fff;color:#0f5c46;border:1px solid rgba(15,92,70,.16);}
+@media(max-width:900px){
+    .greeting-hero{padding:120px 6% 55px;}
+    .greeting-section{padding:55px 6%;}
+    .greeting-layout{grid-template-columns:1fr;gap:28px;}
+    .president-card{position:static;display:flex;align-items:center;text-align:left;gap:20px;padding:20px;}
+    .president-card img{width:110px;min-width:110px;margin:0;border-radius:18px;}
+    .greeting-content{padding:30px 24px;border-radius:26px;}
+    .greeting-content h2{font-size:28px;}
+    .greeting-content p{font-size:16px;line-height:1.9;}
+}
+@media(max-width:560px){
+    .greeting-hero{padding:110px 24px 45px;}
+    .greeting-hero h1{font-size:44px;}
+    .greeting-hero span{font-size:15px;}
+    .greeting-section{padding:40px 20px;}
+    .president-card{align-items:flex-start;}
+    .president-card img{width:92px;min-width:92px;}
+    .president-card h2{font-size:20px;}
+    .president-card p{font-size:14px;}
+    .greeting-content{padding:26px 20px;}
+    .greeting-content h2{font-size:24px;}
+    .greeting-content p{font-size:15px;}
+    .greeting-signature{text-align:left;font-size:16px;}
+}
+.greeting-signature{white-space:pre-line;}

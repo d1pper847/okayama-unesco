@@ -152,3 +152,223 @@
 .lang-btn.active{
     opacity:1;
 }
+
+
+/* ── Language dropdown (replaces inline buttons) ─────────────────────── */
+
+.language-switch {
+    position: relative;
+}
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 999px;
+    transition: background 0.2s, opacity 0.2s;
+    white-space: nowrap;
+}
+
+.lang-toggle:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.navbar.scrolled .lang-toggle:hover {
+    background: rgba(0,0,0,0.07);
+}
+
+.lang-toggle svg {
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+.lang-chevron {
+    font-style: normal;
+    font-size: 0.65rem;
+    opacity: 0.7;
+    transition: transform 0.2s;
+}
+
+.language-switch.open .lang-chevron {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+    padding: 6px;
+    min-width: 148px;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.language-switch.open .lang-dropdown {
+    display: block;
+    animation: langDropIn 0.18s ease;
+}
+
+@keyframes langDropIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 14px;
+    border: none;
+    background: transparent;
+    color: #1f1f1f;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 9px;
+    transition: background 0.15s;
+    text-align: left;
+}
+
+.lang-option:hover {
+    background: #f0f5f2;
+}
+
+.lang-option.active {
+    background: #e8f2ec;
+    color: #184d3b;
+    font-weight: 700;
+}
+
+.lang-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* Hide old separators if any slip through */
+.language-switch > span { display: none; }
+
+
+/* V22: stronger contrast for inner pages and auth pages */
+.navbar.inner-navbar,
+.navbar.scrolled{
+    background:rgba(248,247,242,0.94);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.navbar.inner-navbar .logo h2,
+.navbar.inner-navbar .nav-links a,
+.navbar.inner-navbar .language-switch,
+.navbar.scrolled .logo h2,
+.navbar.scrolled .nav-links a,
+.navbar.scrolled .language-switch{
+    color:#184d3b;
+}
+
+.navbar.inner-navbar .menu-btn span,
+.navbar.scrolled .menu-btn span{
+    background:#184d3b;
+}
+
+.navbar.inner-navbar .nav-links a:hover,
+.navbar.scrolled .nav-links a:hover{
+    color:#0f3528;
+    opacity:1;
+}
+
+/* added for 7-menu desktop navigation */
+.nav-links{gap:clamp(18px,2vw,34px);}
+.nav-links a{white-space:nowrap;}
+@media(max-width:1180px){
+  .nav-links{gap:18px;}
+  .nav-links a{font-size:14px;}
+}
+
+/* Final v1.0 official branding */
+.site-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:220px;
+    text-decoration:none;
+}
+.site-logo-img{
+    height:44px;
+    width:auto;
+    max-width:210px;
+    object-fit:contain;
+    border-radius:4px;
+    background:#fff;
+}
+.site-brand-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+    color:inherit;
+}
+.site-brand-text strong{
+    font-size:1.02rem;
+    letter-spacing:.04em;
+    color:white;
+    transition:.35s ease;
+}
+.site-brand-text small{
+    margin-top:4px;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:rgba(255,255,255,.88);
+    transition:.35s ease;
+}
+.navbar.scrolled .site-brand-text strong,
+.navbar.inner-navbar .site-brand-text strong,
+.navbar.scrolled .site-brand-text small,
+.navbar.inner-navbar .site-brand-text small{
+    color:#184d3b;
+}
+.navbar.inner-navbar .site-logo-img,
+.navbar.scrolled .site-logo-img{
+    box-shadow:0 4px 16px rgba(0,0,0,.06);
+}
+@media(max-width:1180px){
+    .site-logo-img{height:38px;max-width:170px;}
+    .site-brand{min-width:auto;gap:10px;}
+    .site-brand-text small{display:none;}
+}
+@media(max-width:768px){
+    .navbar{padding:18px 6%;}
+    .site-logo-img{height:34px;max-width:150px;}
+    .site-brand-text strong{font-size:.88rem;}
+    .nav-right{gap:10px;}
+    .lang-toggle{padding:6px 7px;font-size:.78rem;}
+    .menu-btn{
+        display:block !important;
+        width:42px !important;
+        height:42px !important;
+        border-radius:999px !important;
+        background:rgba(24,77,59,.08) !important;
+        border:1px solid rgba(24,77,59,.12) !important;
+        padding:10px !important;
+    }
+    .menu-btn span{background:#184d3b !important;width:20px;margin:5px auto;}
+    .mobile-menu{top:76px;left:5%;right:5%;}
+}
+@media(max-width:430px){
+    .site-logo-img{height:30px;max-width:118px;}
+    .site-brand-text{display:none;}
+}

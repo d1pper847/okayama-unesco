@@ -8,59 +8,76 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 public class Main {
-    private static final AuthService authService = new AuthService();
-    private static final ContactDAO contactDAO = new ContactDAO();
+
+    private static final Logger LOG = Logger.getLogger(Main.class.getName());
+    private static final AuthService  AUTH_SERVICE = new AuthService();
+    private static final ContactDAO   CONTACT_DAO  = new ContactDAO();
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(Config.SERVER_PORT), 0);
+        server.setExecutor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2));
 
         server.createContext("/api/health", exchange -> {
             addCors(exchange);
             if (handleOptions(exchange)) return;
             boolean dbOk = Database.testConnection();
-            String response = "{\"status\":\"OK\",\"backend\":\"running\",\"version\":\"V19\",\"database\":\"" + (dbOk ? "connected" : "not connected") + "\"}";
-            sendJson(exchange, 200, response);
+            sendJson(exchange, 200,
+                "{\"status\":\"OK\",\"backend\":\"running\",\"database\":\""
+                + (dbOk ? "connected" : "not connected") + "\"}");
+        });
+
+
+        server.createContext("/api/languages", exchange -> {
+            addCors(exchange);
+            if (handleOptions(exchange)) return;
+            if (!exchange.getRequestMethod().equalsIgnoreCase("GET")) {
+                sendJson(exchange, 405, "{\"message\":\"GET only\"}");
+                return;
+            }
+            sendJson(exchange, 200, "{\"languages\":" + SupportedLanguages.JSON + "}");
         });
 
         server.createContext("/api/register", exchange -> {
             addCors(exchange);
             if (handleOptions(exchange)) return;
-            if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
-                sendJson(exchange, 405, "{\"message\":\"POST only\"}");
-                return;
-            }
+            if (!isPost(exchange)) return;
 
             try {
                 Map<String, String> data = JsonUtil.parseSimpleJson(readBody(exchange));
-                User user = authService.register(data.get("name"), data.get("email"), data.get("password"));
+                User user  = AUTH_SERVICE.register(data.get("name"), data.get("email"), data.get("password"));
                 String token = SessionManager.createSession(user);
-                sendJson(exchange, 201, "{\"message\":\"Account created successfully.\",\"token\":\"" + token + "\",\"user\":" + JsonUtil.userJson(user) + "}");
+                sendJson(exchange, 201,
+                    "{\"message\":\"Account created successfully.\",\"token\":\"" + token
+                    + "\",\"user\":" + JsonUtil.userJson(user) + "}");
             } catch (IllegalArgumentException e) {
                 sendJson(exchange, 400, "{\"message\":\"" + JsonUtil.escape(e.getMessage()) + "\"}");
             } catch (Exception e) {
-                sendJson(exchange, 500, "{\"message\":\"Database error. Please check MySQL and schema.sql.\",\"detail\":\"" + JsonUtil.escape(e.getMessage()) + "\"}");
+                LOG.severe("Register error: " + e.getMessage());
+                sendJson(exchange, 500, "{\"message\":\"An internal error occurred. Please try again.\"}");
             }
         });
 
         server.createContext("/api/login", exchange -> {
             addCors(exchange);
             if (handleOptions(exchange)) return;
-            if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
-                sendJson(exchange, 405, "{\"message\":\"POST only\"}");
-                return;
-            }
+            if (!isPost(exchange)) return;
 
             try {
                 Map<String, String> data = JsonUtil.parseSimpleJson(readBody(exchange));
-                User user = authService.login(data.get("email"), data.get("password"));
+                User user  = AUTH_SERVICE.login(data.get("email"), data.get("password"));
                 String token = SessionManager.createSession(user);
-                sendJson(exchange, 200, "{\"message\":\"Login successful.\",\"token\":\"" + token + "\",\"user\":" + JsonUtil.userJson(user) + "}");
+                sendJson(exchange, 200,
+                    "{\"message\":\"Login successful.\",\"token\":\"" + token
+                    + "\",\"user\":" + JsonUtil.userJson(user) + "}");
             } catch (IllegalArgumentException e) {
                 sendJson(exchange, 401, "{\"message\":\"" + JsonUtil.escape(e.getMessage()) + "\"}");
             } catch (Exception e) {
-                sendJson(exchange, 500, "{\"message\":\"Database error. Please check MySQL and schema.sql.\",\"detail\":\"" + JsonUtil.escape(e.getMessage()) + "\"}");
+                LOG.severe("Login error: " + e.getMessage());
+                sendJson(exchange, 500, "{\"message\":\"An internal error occurred. Please try again.\"}");
             }
         });
 
@@ -83,48 +100,43 @@ public class Main {
         server.createContext("/api/logout", exchange -> {
             addCors(exchange);
             if (handleOptions(exchange)) return;
-            if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
-                sendJson(exchange, 405, "{\"message\":\"POST only\"}");
-                return;
-            }
-
+            if (!isPost(exchange)) return;
             SessionManager.removeSession(getBearerToken(exchange));
             sendJson(exchange, 200, "{\"message\":\"Logout successful.\"}");
         });
 
-
-
         server.createContext("/api/contact", exchange -> {
             addCors(exchange);
             if (handleOptions(exchange)) return;
-            if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
-                sendJson(exchange, 405, "{\"message\":\"POST only\"}");
-                return;
-            }
+            if (!isPost(exchange)) return;
 
             try {
                 Map<String, String> data = JsonUtil.parseSimpleJson(readBody(exchange));
-                String name = data.get("name");
-                String email = data.get("email");
+                String name    = data.get("name");
+                String email   = data.get("email");
                 String subject = data.getOrDefault("subject", "");
                 String message = data.get("message");
 
-                if (name == null || name.isBlank() || email == null || email.isBlank() || message == null || message.isBlank()) {
+                if (isBlank(name) || isBlank(email) || isBlank(message)) {
                     sendJson(exchange, 400, "{\"message\":\"Name, email, and message are required.\"}");
                     return;
                 }
+                 if (name.length() > 100 || email.length() > 255 || subject.length() > 255 || message.length() > 5000) {
+                    sendJson(exchange, 400, "{\"message\":\"Input exceeds maximum allowed length.\"}");
+                    return;
+                }
 
-                contactDAO.saveMessage(name.trim(), email.trim(), subject.trim(), message.trim());
-                sendJson(exchange, 201, "{\"message\":\"Message saved successfully.\"}");
+                CONTACT_DAO.saveMessage(name.trim(), email.trim(), subject.trim(), message.trim());
+                sendJson(exchange, 201, "{\"message\":\"Message received. Thank you!\"}");
             } catch (Exception e) {
-                sendJson(exchange, 500, "{\"message\":\"Database error. Please check MySQL and schema.sql.\",\"detail\":\"" + JsonUtil.escape(e.getMessage()) + "\"}");
+                LOG.severe("Contact error: " + e.getMessage());
+                sendJson(exchange, 500, "{\"message\":\"An internal error occurred. Please try again.\"}");
             }
         });
 
-        server.setExecutor(null);
         server.start();
-        System.out.println("Okayama UNESCO backend Final Version started at http://localhost:" + Config.SERVER_PORT);
-        System.out.println("Database status: " + (Database.testConnection() ? "connected" : "not connected"));
+        LOG.info("Okayama UNESCO backend started on port " + Config.SERVER_PORT);
+        LOG.info("Database: " + (Database.testConnection() ? "connected" : "NOT connected – check MySQL and schema.sql"));
     }
 
     private static String getBearerToken(HttpExchange exchange) {
@@ -137,6 +149,14 @@ public class Main {
         return new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
     }
 
+    private static boolean isPost(HttpExchange exchange) throws IOException {
+        if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
+            sendJson(exchange, 405, "{\"message\":\"POST only\"}");
+            return false;
+        }
+        return true;
+    }
+
     private static boolean handleOptions(HttpExchange exchange) throws IOException {
         if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
             sendJson(exchange, 200, "{}");
@@ -146,17 +166,22 @@ public class Main {
     }
 
     private static void addCors(HttpExchange exchange) {
-        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        var headers = exchange.getResponseHeaders();
+        headers.add("Access-Control-Allow-Origin",  Config.CORS_ORIGIN);
+        headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 
-    private static void sendJson(HttpExchange exchange, int status, String response) throws IOException {
-        byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+    private static void sendJson(HttpExchange exchange, int status, String body) throws IOException {
+        byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
         exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
         exchange.sendResponseHeaders(status, bytes.length);
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(bytes);
         }
+    }
+
+    private static boolean isBlank(String s) {
+        return s == null || s.isBlank();
     }
 }
